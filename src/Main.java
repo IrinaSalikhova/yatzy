@@ -5,6 +5,11 @@ public class Main {
 
 System.out.println("Yatze");
 
+Dice die = new Dice();
+
+die.roll();
+
+System.out.println("" +die.dieValue());
 	}
 
 }
