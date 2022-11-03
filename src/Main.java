@@ -5,11 +5,31 @@ public class Main {
 
 System.out.println("Yatze");
 
-Dice die = new Dice();
+YatzeGame game = new YatzeGame();
 
-die.roll();
+game.rollDice();
 
-System.out.println("" +die.dieValue());
-	}
+game.keepDie(0);
+game.keepDie(3);
+System.out.println(game.diceValues());
+	
+
+	game.rollDice();
+
+	game.keepDie(0);
+	game.keepDie(2);
+	System.out.println(game.diceValues());
+		
+
+
+game.rollDice();
+
+System.out.println(game.diceValues());
+	
+
+	game.rollDice();
+
+	System.out.println(game.diceValues());
+		}
 
 }
