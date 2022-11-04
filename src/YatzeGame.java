@@ -49,15 +49,3 @@ public class YatzeGame {
 			
 	}
 }
-/*
-In YatzyGame.java, implement a current state of a game.
-
-A yatze game comprises of a turn, which includes
-
-Which roll you are on (0, 1, 2, or 3)
-Current value on each of the 5 dice
-Keep / re-roll state of each dice
-The YatzyGame should focus on tracking the state of the game without knowing much about the rules, that comes next!
-
-Commit these changes and push to GitHub.
-*/
