@@ -1,12 +1,10 @@
 package controllers;
 
 import play.mvc.*;
-import javax.inject.Inject;
 import play.libs.Json;
-import com.fasterxml.jackson.databind.JsonNode;
-inport com.fasterxml.jackson.databind.node.ArrayNode;
-
-
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import java.util.concurrent.ThreadLocalRandom;
 
 
 /**
@@ -25,41 +23,32 @@ public class HomeController extends Controller {
         return ok(views.html.index.render());
     }
 
+
  public Result roll() {
-        return ok(views.html.index.render());
+	 int newRoll = ThreadLocalRandom.current().nextInt(1,7);
+        return ok("" + newRoll);
     }
+
 	
 	public Result rollMany(int n) {
-        return ok(views.html.index.render());
+		ObjectNode rollResult = Json.newObject();
+		ArrayNode rolling = Json.newArray();
+		for (int i = 0; i<n; i++) {
+			 int newdie = ThreadLocalRandom.current().nextInt(1,7);
+			 rolling.add(newdie);
+		}
+		rollResult.put("diceroller", rolling);
+        return ok(rollResult);
     }
 
-    VersionClass result;
-    
+
+
     public Result version() {
-		result.setappname("diceroller");
-		result.setversion("v0.1.0");
-        return ok(Json.toJson(result));
+    	ObjectNode versionResult = Json.newObject();
+    	versionResult.put("appname", "diceroller");
+    	versionResult.put("version", "v0.1.0");
+        return ok(versionResult);
     }
     
-    class VersionClass {
-    	String appname;
-    	String version;
-    	
-    	public void setappname(String name) {
-    		appname = name;
-    	}
-    	
-    	public void setversion (String ver) {
-    		version = ver;
-    	}
-    	
-    	public String getappname() {
-    		return appname;
-    	}
-    	
-    	public String getversion() {
-    		return version;
-    	}
-    }
-
+   
 }
