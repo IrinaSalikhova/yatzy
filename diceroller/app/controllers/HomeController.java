@@ -5,6 +5,7 @@ import play.libs.Json;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.ArrayList;
 
 
 /**
@@ -13,6 +14,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class HomeController extends Controller {
 
+	ArrayList<Integer> 	dicelist = new ArrayList<>(); 
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -31,7 +33,7 @@ public class HomeController extends Controller {
 
 	
 	public Result rollMany(int n) {
-		ObjectNode rollResult = Json.newObject();
+	/*	ObjectNode rollResult = Json.newObject();
 		ArrayNode rolling = Json.newArray();
 		for (int i = 0; i<n; i++) {
 			 int newdie = ThreadLocalRandom.current().nextInt(1,7);
@@ -39,6 +41,13 @@ public class HomeController extends Controller {
 		}
 		rollResult.put("diceroller", rolling);
         return ok(rollResult);
+        */
+		dicelist.clear();
+		for (int i = 0; i<n; i++) {
+			 int newdie = ThreadLocalRandom.current().nextInt(1,7);
+			 dicelist.add(newdie);
+		}
+        return ok(Json.toJson(dicelist));
     }
 
 
@@ -46,7 +55,7 @@ public class HomeController extends Controller {
     public Result version() {
     	ObjectNode versionResult = Json.newObject();
     	versionResult.put("appname", "diceroller");
-    	versionResult.put("version", "v0.1.0");
+    	versionResult.put("version", "v0.2.0");
         return ok(versionResult);
     }
     
