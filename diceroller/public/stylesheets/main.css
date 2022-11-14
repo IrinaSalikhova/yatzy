@@ -1,0 +1,398 @@
+/* header design*/
+#header {
+	padding: 5px;
+	min-width: 500px;
+	position: relative;
+	height: 120px;
+	background-color: #1A090D;
+	border-radius: 10px;	
+}
+
+#headercontainer {
+margin-top: -15px;	
+width: 100%;
+display: inline-block;
+font-family: 'Fira Sans', sans-serif;
+	font-style: normal;
+	font-weight: 600;
+	color: #F4F1BB;
+	text-align:center;
+}
+
+#y1 {
+    font-size: 75px;
+	transform: translate(5px, 20px) rotate(-35deg);
+}
+
+#a2 {
+	font-size: 60px;
+    transform: translate(3px, 0px) rotate(-31deg);
+}
+
+#h3 {
+	font-size: 50px;
+    transform: translate(5px, -15px) rotate(-27deg);
+}
+
+#t4 {
+	font-size: 45px;
+    transform: translate(4px,-25px) rotate(-23deg);
+}
+
+#z5 {
+	font-size: 40px;
+    transform: translate(4px, -30px) rotate(-19deg);
+}
+
+#e6 {
+	font-size: 35px;
+    transform: translate(3px, -27px) rotate(-15deg);
+}
+
+#e7 {
+	font-size: 35px;
+    transform: translate(-1px, -24px) rotate(-11deg);
+}
+
+#l8 {
+	font-size: 70px;
+    transform: translate(-2px, -20px) rotate(-7deg);
+}
+
+ span {
+    display: inline-block;
+}	
+
+.imgheader {
+	width: 200px;
+	margin-top: -550px;
+  margin-left: 450px;
+  margin-bottom: 55px;
+	display:inline-block;
+	transform: translate(20px, 50px) rotate(-15deg);
+}
+
+/* board design*/
+.yahtzee-board {
+    background-color: #A7ADC6;
+    border-width:20px; 
+	border-style:solid; 
+	border-color:#ED6A5A; 
+  position: relative;
+  width:100%;
+  height:90%;
+  padding: 20px;
+  margin-left: 0px;
+  display: inline-block;
+}
+
+/* buttons design*/
+.buttoncontainer {
+	position: relative;
+	float:left;
+}
+
+button {
+background-color: #1A090D;
+color:#f4f1bb;
+border-radius: 10px;
+font-family: 'Fira Sans', sans-serif;
+position: relative;
+display: block;
+width: fit-content;
+height: 40px;
+margin-bottom: 15px;
+padding: 10px 15px;
+font-size: 20px;
+font-weight: 500;
+cursor: pointer;
+text-align: center;
+z-index: 5;
+}
+
+button:hover{
+  background-color: #56667a;
+}
+
+#roll{
+width: 150px;
+height: 60px;
+margin-bottom: 15px;
+padding: 10px 15px;
+font-size: 26px;
+font-weight: 600; 
+ text-align: center;
+position: relative;
+display: inline-block;
+}
+
+.buttoncontainer a {
+  text-decoration: none;
+	color:#f4f1bb;
+} 
+
+.dicezone p{
+  text-align: center;
+  color: #F4F1BB;
+  font-size: 20px ;
+  font-weight: bold;
+}
+
+/*About button*/
+
+.assignment {
+  display: none; 
+  position: absolute; 
+  z-index: 1; 
+  overflow: auto; 
+  padding-right: 15px;
+  padding-left: 5px;
+  background-color: #F4F1BB;
+  color: #ED6A5A;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.about_content{
+  background-color: #F4F1BB;
+  margin: auto;
+  border: 1px solid #ED6A5A;
+  width: 80%;
+}
+
+.close{
+  color: #56667A;
+  float: right;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #1A090D;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* dice design*/
+
+.dicezone {
+  position: relative;
+  display: inline-block;
+	background-color: #A7ADC6;
+	align-items: center;
+	text-align: center;
+  margin-left: 35px;
+}
+
+.container{
+    position: relative;
+    background-color: #A7ADC6;
+    border-radius: 8px;
+    align-items: center;
+    font-family: "Poppins",sans-serif;
+}
+
+.dice-wrapper{
+    margin: 10px;
+    object-fit: cover;
+    width: auto;
+    height: auto;
+    display: flex;
+ 
+}
+
+.dice-wrapper img{
+    margin: 5px;
+    
+}
+
+.dice-wrapper:hover {
+    cursor: pointer;
+}
+
+  .dice.held {
+    box-shadow: 5px 5px 15px 23px #ED6a5a;
+    position: relative;
+}
+
+.hold {
+	box-shadow: 0px 0px 15px 10px #ED6a5a;
+}
+  
+.shake{
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake{
+    0%{
+        transform: rotate(8deg);
+    }
+    50%{
+        transform: rotate(-8deg);
+    }
+    100%{
+        transform: rotate(8deg);
+    }
+}
+
+/* scoreboard design*/
+.scoreboard{
+    background-color: #F4F1BB;
+ 
+    color: #56667A;
+	  float: right;
+    border-color: #ED6A5A;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+
+    position:relative;
+	  display: inline-block;
+	  z-index: 5;
+}
+
+th,td{
+    border: solid 2px #ED6A5A;
+    padding-left: 3px;
+    padding-top: 2px;
+padding-bottom: 2px;
+}
+
+.tabletotaling {
+font-weight: 600;
+text-align: center;
+}
+
+.yourscore {
+width: 100px;
+text-align: center;
+color: #56667A;
+display: inline-block;
+}
+
+.yourscore p {
+color: #A7ADC6;
+display: inline;
+cursor: pointer;
+}
+
+.totalscore {
+text-align: center;
+color: #56667A;	
+}
+
+td .hint {
+visibility: hidden;
+background-color: #A7ADC6;
+font-family: 'Fira Sans', sans-serif;
+font-weight: 200;
+font-style: italic;
+font-size: 14px;
+color: #1A090D;
+text-align: center;
+padding: 5px 0;
+border-radius: 6px;
+position: absolute;
+z-index:1;
+}
+
+td:hover {
+cursor: pointer;
+}
+
+td:hover .hint {
+cursor: pointer;
+visibility: visible;
+}
+
+/* congratulation animation design*/
+.congrat {
+	  display: flex;
+  justify-content: center;
+  align-items: center;
+   font-family: 'Fira Sans', sans-serif;
+   font-weight: 600;
+   font-style: italic;
+   font-size: 7em;
+   text-align: center;
+   color: #ED6A5A;
+   transform: scale(0.5);
+  animation: scaleCup 5s;
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  white-space: pre-line;
+}
+
+  @keyframes scaleCup {
+	  0% {
+	opacity: 1;
+    transform: scale(0.6);
+	z-index: 10;
+  } 
+  50% {
+    transform: scale(1);
+	z-index: 10;
+  }
+  99% {
+    transform: scale(0.6);
+	z-index: 10;
+  }
+  100% {
+    opacity: 0;
+	display: none;
+  }
+}
+@keyframes confettiRain {
+  0% {
+    opacity: 1;
+	z-index: 10;
+    margin-top: -100vh;
+    margin-left: -200px;
+  } 
+  
+  100% {
+    opacity: 1;
+    margin-top: 100vh;
+    margin-left: 200px;
+	z-index: 10;
+	
+  }
+}
+
+.confetti {
+  opacity: 0;
+  position: absolute;
+  width: 1rem;
+  height: 1.5rem;
+  transition: 500ms ease;
+  animation: confettiRain 5s;
+  z-index: 1;
+}
+
+#confetti-wrapper {
+   overflow: hidden !important;
+}
+
+/* footer design*/
+p a{
+	text-decoration: none;
+	color:#f4f1bb;
+}
+
+body{
+background-color: #1a090d;
+font-family: 'Fira Sans', sans-serif;
+color: #f4f1bb;
+display: inline-block;
+margin-left: 75px;
+}
+
+.footer{
+	background-color: #1A090D;
+	font-family:'Fira Sans', sans-serif;
+	text-align: center;
+	font-size: 16px;
+	color: #f4f1bb;
+}

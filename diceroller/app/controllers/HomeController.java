@@ -15,6 +15,8 @@ import java.util.ArrayList;
 public class HomeController extends Controller {
 
 	ArrayList<Integer> 	dicelist = new ArrayList<>(); 
+	YatzeGame game;
+	
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -26,10 +28,7 @@ public class HomeController extends Controller {
     }
 
 
- public Result roll() {
-	 int newRoll = ThreadLocalRandom.current().nextInt(1,7);
-        return ok("" + newRoll);
-    }
+ 
 
 	
 	public Result rollMany(int n) {
@@ -47,6 +46,7 @@ public class HomeController extends Controller {
 			 int newdie = ThreadLocalRandom.current().nextInt(1,7);
 			 dicelist.add(newdie);
 		}
+		
         return ok(Json.toJson(dicelist));
     }
 
@@ -59,5 +59,88 @@ public class HomeController extends Controller {
         return ok(versionResult);
     }
     
-   
+    public Result gotoyahtzee() {
+
+ game = new YatzeGame();
+    	 return ok(views.html.version.render());
+    }
+ 
+    public Result roll() {
+
+     game.rollDice();
+     game.diceValues().add(game.rollCount);
+
+           return ok(Json.toJson(game.diceValues()));
+       }
 }
+
+ class Dice {
+	
+	private int die;	
+	
+	public Dice() {
+		die = 0;
+	}
+
+	public int dieValue() {
+		return die;
+	}
+	
+	public void roll () {
+		 die = ThreadLocalRandom.current().nextInt(1, 7);
+	} 
+}
+	
+
+ class YatzeGame {
+	public Dice[] dice;
+	
+	public static int rollCount = 0;
+	
+	private boolean[] diceState;
+
+	public YatzeGame() {
+		dice = new Dice[5];
+		diceState = new boolean[5];
+		for (int i = 0; i < dice.length; i++) {
+				dice[i] = new Dice();
+				diceState[i] = false;
+				}
+		
+	}
+	
+	public Dice[] rollDice() {
+		if (rollCount < 3) {
+			for (int i = 0; i < dice.length; i++) {
+				if (!diceState[i]) {
+					dice[i].roll();
+				}
+			}
+			rollCount ++;
+		}
+		return dice;
+	}
+	
+	public void keepDie(int i) {
+		diceState[i] = !diceState[i];
+	}
+	
+	public boolean isKept (int i) {
+		return diceState[i];
+	}
+
+	public int dieValue (int i) {
+		return dice[i].dieValue();
+	}
+	
+	public ArrayList<Integer> diceValues() {
+		ArrayList<Integer> 	dicelist = new ArrayList<>();
+		for (int i = 0; i < dice.length; i++) {
+			dicelist.add(dieValue(i)); 
+		}
+		dicelist.add(3-rollCount);
+		return dicelist;
+			
+	}
+}
+

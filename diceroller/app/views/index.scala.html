@@ -8,9 +8,12 @@
 <h3>Enter the number of rolls</h3>
   <form action="">
   <label for="name">Input rolls:</label>
-  <input type="text" id="name" name="name"><br><br>
-  <input id="submit" type="submit" value="Submit">
+  <input type="text" id="name" name="name"> </input>
+  <br><br>
+  <button id="submit" type="submit" value="Submit"> Submit </button>
   <p id="para" style="display: none;"></p>
+  <br> <br>
+    <p>Now, let's <a href="@routes.HomeController.gotoyahtzee">go to Yahtzee!</a>.</p>
 </form>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -35,8 +38,8 @@
   });
   $("#versioninfo").hide();
   $("#version").click(function(e){
+	  e.preventDefault();
 	  $("#versioninfo").html("");
-    e.preventDefault();
 	$.ajax({
         url: "http://localhost:9000/version",
         type: 'GET',
@@ -51,8 +54,7 @@
 	});
   });
   
-});
-  
+  });
 
   </script>
   

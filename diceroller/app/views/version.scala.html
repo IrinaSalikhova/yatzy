@@ -1,5 +1,128 @@
 @()
 
 @main("Welcome to Play") {
-  <h1>Version 0.2.0 </h1>
+  <div id="header">
+    <div id="headercontainer">
+<h1 id="my.name"> 
+    <span id="y1">Y</span>
+    <span id="a2">a</span>
+    <span id="h3">h</span>
+    <span id="t4">t</span>
+    <span id="z5">z</span>
+    <span id="e6">e</span>
+    <span id="e7">e</span>
+    <span id="l8">!</span>
+</h1>
+<img src="@routes.Assets.versioned("images/dices.png")" class="imgheader" alt="dices icon"> 
+</div>
+</div>
+<div class="yahtzee-board">
+ <div class="buttoncontainer">
+	  <button id="New_game"> <a href=""> <span>New Game</span> </button> </a>
+	  <button id="Rules"> <a href = "../Rules of Yahtzee.pdf"> <span>Rules</span> </button> </a>
+      <!--Open the modal--> 
+      <button id="About" > <span>About</span> </button>
+      <!--Main modal-->
+      <div id="aboutAssignment" class="assignment">
+        <!-- Close modal-->
+        <div class="about-content">
+            <span class="close">&times;</span>
+            <p> </p>
+        </div>
+
+      </div>
+ </div>
+
+ 
+<div class = "dicezone">
+<br> <br>
+	<button id="roll"> Roll </button>
+
+    <p> Rounds left: <span id= "rounds">13</span></p>
+	<p>Rolls left: <span id="turns">3</span></p>
+  <br> <br>
+    
+	 <div class="container">
+        <div class="dice-wrapper">
+            <img src="@routes.Assets.versioned("images/dice-1.png")" width="100" height="100" class = "dieimage" id="die1" >
+            <img src="@routes.Assets.versioned("images/dice-1.png")" width="100" height="100" class = "dieimage" id="die2" >
+            <img src="@routes.Assets.versioned("images/dice-1.png")" width="100" height="100" class = "dieimage" id="die3" >
+            <img src="@routes.Assets.versioned("images/dice-1.png")" width="100" height="100" class = "dieimage" id="die4" >
+            <img src="@routes.Assets.versioned("images/dice-1.png")" width="100" height="100" class = "dieimage" id="die5" >
+            
+        </div>
+      </div>
+	  <br> 
+  	 <p>Click a die to hold it</p>
+
+</div>	
+			
+</div>
+	  <div class="footer">
+            <p> Created by 
+                <a href="https://github.com/IrinaSalikhova"> Irina Salikhova </a>,
+            </p>      
+        </div>
+
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+
+  let images = ["@routes.Assets.versioned("images/dice-1.png")",
+	  "@routes.Assets.versioned("images/dice-2.png")",
+	  "@routes.Assets.versioned("images/dice-3.png")",
+	  "@routes.Assets.versioned("images/dice-4.png")",
+	  "@routes.Assets.versioned("images/dice-5.png")",
+	  "@routes.Assets.versioned("images/dice-6.png")"];
+  
+  const dice = [
+	   {value: 1, hold: false, image: document.querySelector("#die1") },
+	   {value: 1, hold: false, image: document.querySelector("#die2")},
+	   {value: 1, hold: false, image: document.querySelector("#die3")},
+	   {value: 1, hold: false, image: document.querySelector("#die4")},
+	   {value: 1, hold: false, image: document.querySelector("#die5")}
+	];
+  dice.forEach(function(die){
+		
+	   die.image.setAttribute("src", images[die.value -1]);
+	   die.image.addEventListener("click",function handleClick(event) {
+	    });
+		
+		  });
+  
+  $(document).ready(function(){
+  $("#roll").click(function(e){
+    e.preventDefault();
+    dice.forEach(function(die){
+        if (!die.hold) {
+		die.image.classList.add("shake");
+		};
+		});
+    setTimeout(function(){ 
+    dice.forEach(function(die){
+		if (!die.hold) {
+        die.image.classList.remove("shake"); };
+    });
+},
+    1000 );
+	$.ajax({
+        url: "http://localhost:9000/roll",
+        type: 'GET',
+        dataType: 'json', 
+        success: function(res) {
+        	for (let i = 0; i < 5; i++) { 
+        		dice[i].value = res[i];	
+        		dice[i].image.setAttribute("src", images[res[i] -1]);
+        		
+        };
+        $("#turns").html(res[5]);
+    }
+        
+	
+	});
+  });
+  });
+  
+
+  </script>
+  
 }
