@@ -28,7 +28,10 @@
 			$("#para").append("The total number of rolls are:" + res);
 			$("#para").show();
         }
-    });		
+    }).done(function() {}).fail(function (msg) {
+    	$("#para").append("Please enter a valid number");
+		$("#para").show();
+    }).always(function (msg) {});		
   });
   $("#versioninfo").hide();
   $("#version").click(function(e){
