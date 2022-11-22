@@ -1,6 +1,6 @@
 @()
 
-@main("Welcome to Play") {
+@main("Yahtzee!") {
   <div id="header">
     <div id="headercontainer">
 <h1 id="my.name"> 
@@ -18,8 +18,8 @@
 </div>
 <div class="yahtzee-board">
  <div class="buttoncontainer">
-	  <button id="New_game"> <a href=""> <span>New Game</span> </button> </a>
-	  <button id="Rules"> <a href = "../Rules of Yahtzee.pdf"> <span>Rules</span> </button> </a>
+	  <button id="New_game"> <a href=""> <span>New Game</span>  </a> </button>
+	  <button id="Rules"> <a href = "../Rules of Yahtzee.pdf"> <span>Rules</span>  </a> </button>
       <!--Open the modal--> 
       <button id="About" > <span>About</span> </button>
       <!--Main modal-->
@@ -55,73 +55,365 @@
 	  <br> 
   	 <p>Click a die to hold it</p>
 
-</div>	
-			
 </div>
+
+    <div class = "scoreboard">
+        <table>
+            <tr class = "tableheading">
+                <th>UPPER SECTION</th>
+                <th>Score</th>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Aces
+                    <p class = "hint"> Count and add only Aces </p>
+                </td>
+                <td class = "yourscore" id = "aces" > 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Twos
+                    <p class = "hint"> Count and add only Twos </p>
+                </td>
+                <td class = "yourscore" id = "twos"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Threes
+                    <p class = "hint"> Count and add only Threes </p>
+                </td>
+                <td class = "yourscore" id = "threes"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Fours
+                    <p class = "hint"> Count and add only Fours </p>
+                </td>
+                <td class = "yourscore" id = "fours"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Fives
+                    <p class = "hint"> Count and add only Fives </p>
+                </td>
+                <td class = "yourscore" id = "fives"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Sixes
+                    <p class = "hint"> Count and add only Sixes </p>
+                </td>
+                <td class = "yourscore" id = "sixes"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Bonus
+                    <p class = "hint"> Add 35 if total score of upper section > 63 </p>
+                </td>
+                <td class = "yourscore totalscore" id = "bonus35"> 0 </td>
+            </tr>
+            <tr class = "tabletotaling">
+                <td>TOTAL (of upper section)</td>
+                <td class = "yourscore totalscore" id = "uppertotal"> 0 </td>
+            </tr>
+
+            <tr class = "tableheading">
+                <th>LOWER SECTION</th>
+                <th>Score</th>
+            </tr>
+            <tr class = "tablescoring">
+                <td>3 of a kind
+                    <p class = "hint"> Add total of all dice </p>
+                </td>
+                <td class = "yourscore" id = "ofakind3"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>4 of a kind
+                    <p class = "hint"> Add total of all dice </p>
+                </td>
+                <td class = "yourscore" id = "ofakind4"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Full House
+                    <p class = "hint"> Score 25 if there is 3 of a kind and 2 of a kind</p>
+                </td>
+                <td class = "yourscore"  id = "fullhouse"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Small Straight
+                    <p class = "hint"> Score 30 if there is sequence of 4</p>
+                </td>
+                <td class = "yourscore" id = "smallstr"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Large Straight
+                    <p class = "hint"> Score 40 if there is sequence of 5</p>
+                </td>
+                <td class = "yourscore" id = "largestr"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Yahtzee
+                    <p class = "hint"> Score 50 if there is 5 of a kind</p>
+                </td>
+                <td class = "yourscore" id = "yahtzee"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Chance
+                    <p class = "hint">  Add total of all dice </p>
+                </td>
+                <td class = "yourscore" id = "chance"> 0 </td>
+            </tr>
+            <tr class = "tablescoring">
+                <td>Yahtzee bonus
+                    <p class = "hint"> Score 100 for each additional Yahtzee</p>
+                </td>
+                <td class = "yourscore totalscore" id = "bonusyahtzee"> 0 </td>
+            </tr>
+            <tr class = "tabletotaling">
+                <td>TOTAL (of lower section)
+                </td>
+                <td class = "yourscore totalscore" id = "lowertotal"> 0 </td>
+            </tr>
+            <tr class = "tabletotaling">
+                <td>GRAND TOTAL
+                </td>
+                <td class = "yourscore totalscore" id = "totaltotal"> 0 </td>
+            </tr>
+        </table>
+    </div>
+
+    <div id="confetti-wrapper">
+    </div>
+</div>
+
+
 	  <div class="footer">
             <p> Created by 
                 <a href="https://github.com/IrinaSalikhova"> Irina Salikhova </a>,
-            </p>      
+            </p>
         </div>
 
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
   <script>
 
-  let images = ["@routes.Assets.versioned("images/dice-1.png")",
+    let rollsleft = 3;
+    let movesleft = 13;
+    const controller = new AbortController;
+
+    let images = ["@routes.Assets.versioned("images/dice-1.png")",
 	  "@routes.Assets.versioned("images/dice-2.png")",
 	  "@routes.Assets.versioned("images/dice-3.png")",
 	  "@routes.Assets.versioned("images/dice-4.png")",
 	  "@routes.Assets.versioned("images/dice-5.png")",
 	  "@routes.Assets.versioned("images/dice-6.png")"];
-  
-  const dice = [
+
+    const dice = [
 	   {value: 1, hold: false, image: document.querySelector("#die1") },
 	   {value: 1, hold: false, image: document.querySelector("#die2")},
 	   {value: 1, hold: false, image: document.querySelector("#die3")},
 	   {value: 1, hold: false, image: document.querySelector("#die4")},
 	   {value: 1, hold: false, image: document.querySelector("#die5")}
 	];
+
+
+    let scoretable = [];
+	$('.yourscore').each(function(){
+	    let scoreelement = {element: this, fix: false};
+	    scoreelement.element.style.color = "#A7ADC6";
+	    scoreelement.element.style.cursor = "pointer";
+	    scoretable.push(scoreelement);
+	});
+
+
+ for (let i = 6; i < 8; i++) {
+       scoretable[i].fix = true;
+	   scoretable[i].element.style.color = "#56667A";
+	   scoretable[i].element.style.cursor = "auto";
+  };
+ for (let i = 15; i < 18; i++) {
+       scoretable[i].fix = true;
+	   scoretable[i].element.style.color = "#56667A";
+	   scoretable[i].element.style.cursor = "auto";
+  };
+
+ addlisteners();
+function addlisteners() {
+  for (let i = 0; i < 18; i++) {
+        if (!scoretable[i].fix) {
+            scoretable[i].element.addEventListener('click',function handleClick() {
+                scoretable[i].element.style.color = "#56667A";
+                scoretable[i].element.style.cursor = "auto";
+                scoretable[i].fix = true;
+                scoretable[i].element.removeEventListener('click', arguments.callee, false);
+	            $.ajax({
+                    url: "http://localhost:9000/fix/" + i,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) {
+                        movesleft = 13 - res;
+                        $("#rounds").html(movesleft);
+                        if (movesleft == 0) {
+                            rollsleft = 0;
+                            $("#turns").html(rollsleft);
+                            finishgame();
+                        }
+                        else {
+                            rollsleft = 3;
+                            $("#turns").html(rollsleft);
+                            continuegame();
+                        }
+                    }
+                });
+            }, false);
+        };
+  }
+}
+
+
+function continuegame() {
+
+    dice.forEach(function(die) {
+	    if (die.hold) {
+             die.image.classList.toggle('hold');
+	         die.hold = !die.hold;
+	    };
+	});
+	 $.ajax({
+                    url: "http://localhost:9000/countfor0",
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) {
+                     for (let i = 0; i < 18; i++) {
+                        scoretable[i].element.innerHTML = res[i];
+                     }
+                    }
+                });
+}
+
+function countscore() {
+   $.ajax({
+     url: "http://localhost:9000/count",
+     type: 'GET',
+     dataType: 'json',
+     success: function(res) {
+         for (let i = 0; i < 18; i++) {
+            scoretable[i].element.innerHTML = res[i];
+            }
+     }
+   });
+}
+
+
   dice.forEach(function(die){
-		
 	   die.image.setAttribute("src", images[die.value -1]);
 	   die.image.addEventListener("click",function handleClick(event) {
-	    });
-		
-		  });
-  
-  $(document).ready(function(){
-  $("#roll").click(function(e){
-    e.preventDefault();
-    dice.forEach(function(die){
-        if (!die.hold) {
-		die.image.classList.add("shake");
-		};
-		});
-    setTimeout(function(){ 
-    dice.forEach(function(die){
-		if (!die.hold) {
-        die.image.classList.remove("shake"); };
-    });
-},
-    1000 );
-	$.ajax({
-        url: "http://localhost:9000/roll",
+	   	    if ( rollsleft != 3) {
+                event.target.classList.toggle('hold');
+	            die.hold = !die.hold;
+	            let k = dice.indexOf(die);
+	            $.ajax({
+                    url: "http://localhost:9000/hold/" + k,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) { }
+                });
+            }
+      });
+  });
+
+// animation for gameover
+function finishgame() {
+    var totalscore = 0;
+    $.ajax({
+        url: "http://localhost:9000/totalscore",
         type: 'GET',
-        dataType: 'json', 
+        dataType: 'json',
         success: function(res) {
-        	for (let i = 0; i < 5; i++) { 
-        		dice[i].value = res[i];	
-        		dice[i].image.setAttribute("src", images[res[i] -1]);
-        		
-        };
-        $("#turns").html(res[5]);
-    }
-        
-	
+         totalscore = res;
+         celebrateyahtzees();
+	    var yahtzeetext = document.createElement('div');
+        yahtzeetext.className = 'congrat';
+	    yahtzeetext.innerHTML = "Game over! \n Your score is " + totalscore + "!";
+	    yahtzeetext.style.top = 50 + 'px';
+	    yahtzeetext.style.left = 50 + 'px';
+	    document.getElementById("confetti-wrapper").appendChild(yahtzeetext);}
+    }).done(function() {
+	    alert("Game over! \n Your score is " + totalscore + "!");
 	});
+}
+
+
+// animation for yahtzee
+function celebrateyahtzees() {
+	setTimeout(function(){
+
+    for(i=0; i<150; i++) {
+  // Random rotation
+  var randomRotation = Math.floor(Math.random() * 360);
+    // Random Scale
+  var randomScale = Math.random() * 1;
+  // Random width & height between 0 and viewport
+  var randomWidth = Math.floor(Math.random() * Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
+  var randomHeight =  Math.floor(Math.random() * Math.max(100));
+
+  // Random animation-delay
+  var randomAnimationDelay = Math.floor(Math.random() * 5);
+
+  // Random colors
+  var colors = ['#1A090D', '#A7ADC6', '#ED6A5A', '#56667A', '#F4F1BB']
+  var randomColor = colors[Math.floor(Math.random() * colors.length)];
+
+  // Create confetti piece
+  var confetti = document.createElement('div');
+  confetti.className = 'confetti';
+  confetti.style.top=randomHeight + 'px';
+  confetti.style.right=randomWidth + 'px';
+  confetti.style.backgroundColor=randomColor;
+  // confetti.style.transform='scale(' + randomScale + ')';
+  confetti.style.obacity=randomScale;
+  confetti.style.transform='skew(15deg) rotate(' + randomRotation + 'deg)';
+  confetti.style.animationDelay=randomAnimationDelay + 's';
+  document.getElementById("confetti-wrapper").appendChild(confetti);
+}
+	var yahtzeetext = document.createElement('div');
+  yahtzeetext.className = 'congrat';
+	yahtzeetext.innerHTML = "Yahtzee!";
+	yahtzeetext.style.top = 300 + 'px';
+	yahtzeetext.style.left = 150 + 'px';
+	document.getElementById("confetti-wrapper").appendChild(yahtzeetext);
+
+} , 1200 );
+};
+
+  $(document).ready(function(){
+    $("#roll").click(function(e){
+        e.preventDefault();
+        if (rollsleft != 0) {
+            dice.forEach(function(die){
+                if (!die.hold) {
+		            die.image.classList.add("shake");
+		        };
+		    });
+            setTimeout(function(){
+                dice.forEach(function(die){
+		            if (!die.hold) {
+                        die.image.classList.remove("shake");
+                    };
+                });
+            }, 1000 );
+	        $.ajax({
+                url: "http://localhost:9000/roll",
+                type: 'GET',
+                dataType: 'json',
+                success: function(res) {
+        	        for (let i = 0; i < 5; i++) {
+        		        dice[i].value = res[i];
+        		        dice[i].image.setAttribute("src", images[res[i] -1]);
+        		    };
+                    rollsleft = res[5];
+                    $("#turns").html(rollsleft);
+                    countscore();
+                }
+    	    });
+        }
+    });
+
+
   });
-  });
-  
+
 
   </script>
   
