@@ -234,6 +234,7 @@ function addlisteners() {
   for (let i = 0; i < 18; i++) {
         if (!scoretable[i].fix) {
             scoretable[i].element.addEventListener('click',function handleClick() {
+               if ( rollsleft != 3) {
                 scoretable[i].element.style.color = "#56667A";
                 scoretable[i].element.style.cursor = "auto";
                 scoretable[i].fix = true;
@@ -257,6 +258,7 @@ function addlisteners() {
                         }
                     }
                 });
+                };
             }, false);
         };
   }
