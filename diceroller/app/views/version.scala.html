@@ -293,7 +293,10 @@ function countscore() {
      success: function(res) {
          for (let i = 0; i < 18; i++) {
             scoretable[i].element.innerHTML = res[i];
-            }
+            };
+         if (res[18] == 1) {
+             celebrateyahtzees();
+         }
      }
    });
 }
@@ -318,6 +321,16 @@ function countscore() {
 
 // animation for gameover
 function finishgame() {
+    $.ajax({
+         url: "http://localhost:9000/countfor0",
+         type: 'GET',
+         dataType: 'json',
+         success: function(res) {
+             for (let i = 0; i < 18; i++) {
+             scoretable[i].element.innerHTML = res[i];
+             }
+         }
+    });
     var totalscore = 0;
     $.ajax({
         url: "http://localhost:9000/totalscore",
@@ -332,9 +345,7 @@ function finishgame() {
 	    yahtzeetext.style.top = 50 + 'px';
 	    yahtzeetext.style.left = 50 + 'px';
 	    document.getElementById("confetti-wrapper").appendChild(yahtzeetext);}
-    }).done(function() {
-	    alert("Game over! \n Your score is " + totalscore + "!");
-	});
+    })
 }
 
 

@@ -203,6 +203,7 @@ class YatzeEngine {
 	private int upperscore = 0;
 	private int lowerscore = 0;
 	private int totalscore = 0;
+	private int yahtzeechecker = 0;
 
 	public YatzeEngine() {
 		scoreboard = new BoardElement[18];
@@ -219,6 +220,7 @@ class YatzeEngine {
 		upperscore = 0;
 		lowerscore = 0;
 		totalscore = 0;
+		yahtzeechecker = 0;
 
 		Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 		for (int i = 0; i<gameDice.dice.length; i++) {
@@ -320,6 +322,7 @@ class YatzeEngine {
 		if 	(!scoreboard[13].isOnHold()) {
 			if (map.keySet().size() == 1 && !map.containsKey(0)) {
 				scoreboard[13].setElement(50);
+				yahtzeechecker = 1;
 			}
 			else {
 				scoreboard[13].setElement(0);
@@ -374,6 +377,7 @@ class YatzeEngine {
 		for (int i = 0; i < scoreboard.length; i++) {
 			scorelist.add(scoreboard[i].boardElementValue());
 		}
+		scorelist.add(yahtzeechecker);
 		return scorelist;
 
 	}
