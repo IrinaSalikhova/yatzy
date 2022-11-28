@@ -1,0 +1,64 @@
+@()
+
+@main("Welcome to Play") {
+  <h1>Welcome to Play!</h1>
+  <button id = "version", type ="submit" > Version </button>
+  <p id = "versioninfo"> </p>
+  <br>
+<h3>Enter the number of rolls</h3>
+  <form action="">
+  <label for="name">Input rolls:</label>
+  <input type="text" id="name" name="name"> </input>
+  <br><br>
+  <button id="submit" type="submit" value="Submit"> Submit </button>
+  <p id="para" style="display: none;"></p>
+  <br> <br>
+    <p>Now, let's <a href="@routes.HomeController.gotoyahtzee">go to Yahtzee!</a>.</p>
+</form>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+  $(document).ready(function(){
+  $("#para").hide();
+  $("#submit").click(function(e){
+	  $("#para").html("");
+    e.preventDefault();
+	$.ajax({
+        url: "http://localhost:9000/roll/" + $('#name').val(),
+        type: 'GET',
+        dataType: 'json', 
+        success: function(res) {
+			$("#para").append("The total number of rolls are:" + res);
+			$("#para").show();
+        }
+    }).done(function() {}).fail(function (msg) {
+    	$("#para").append("Please enter a valid number");
+		$("#para").show();
+    }).always(function (msg) {});		
+  });
+  $("#versioninfo").hide();
+  $("#version").click(function(e){
+	  e.preventDefault();
+	  $("#versioninfo").html("");
+	$.ajax({
+        url: "http://localhost:9000/version",
+        type: 'GET',
+        dataType: 'json', 
+        success: function(res) {
+    
+			$("#versioninfo").append("appname: " + res.appname + "<br>");
+			$("#versioninfo").append("version: " + res.version);
+			$("#versioninfo").show();
+        }
+	
+	});
+  });
+  
+  });
+
+  </script>
+  
+}
+
+
+  
