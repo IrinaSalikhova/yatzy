@@ -17,6 +17,7 @@ public class BoardElement {
 
     void setElement (int x) {
         element = x;
+        fixed = false;
     }
 
     public int boardElementValue() {

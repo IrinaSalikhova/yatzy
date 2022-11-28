@@ -23,6 +23,9 @@ GET    /count				controllers.HomeController.count()
 GET    /countfor0				controllers.HomeController.countfor0()
 +anyhost
 GET    /totalscore				controllers.HomeController.totalscore()
++anyhost
+GET    /newGame				controllers.HomeController.newGame()
+
 
 # Map static resources from the /public folder to the /assets URL path
 +anyhost

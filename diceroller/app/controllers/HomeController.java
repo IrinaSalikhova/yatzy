@@ -52,11 +52,24 @@ public class HomeController extends Controller {
     }
     
     public Result gotoyahtzee() {
-		tablescore = new YatzeEngine();
- 		game = new YatzeGame();
+		moveCount = 0;
+ 		if (game == null) {
+			game = new YatzeGame();
+			tablescore = new YatzeEngine();
+		} else {
+			game.renewGame();
+			tablescore.renewBoard();
+		};
     	 return ok(views.html.version.render());
     }
- 
+
+	public Result newGame() {
+		moveCount = 0;
+		tablescore.renewBoard();
+		game.renewGame();
+		return ok();
+	}
+
     public Result roll() {
 		game.rollDice();
 

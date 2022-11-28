@@ -161,6 +161,12 @@ public class YatzeEngine {
 
     }
 
+    public void renewBoard() {
+        for (int i = 0; i < scoreboard.length; i++) {
+            scoreboard[i].setElement(0);
+        }
+    }
+
     private int countAll (YatzeGame gameDice) {
         int allCounted = 0;
         for (int i = 0; i<gameDice.dice.length; i++) {
