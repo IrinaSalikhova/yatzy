@@ -5,34 +5,24 @@
 # An example controller showing a sample home page
 +anyhost
 GET     /                           controllers.HomeController.index()
-
 +anyhost
 GET    /version                    controllers.HomeController.version()
-
 +anyhost
 GET    /roll                    controllers.HomeController.roll()
-
 +anyhost
 GET    /roll/:n                   controllers.HomeController.rollMany(n: Int)
-
 +anyhost
 GET    /gotoyahtzee				controllers.HomeController.gotoyahtzee()
-
 +anyhost
 GET    /hold/:n				controllers.HomeController.hold(n: Int)
-
 +anyhost
 GET    /fix/:n				controllers.HomeController.fix(n: Int)
-
 +anyhost
 GET    /count				controllers.HomeController.count()
-
 +anyhost
 GET    /countfor0				controllers.HomeController.countfor0()
-
 +anyhost
 GET    /totalscore				controllers.HomeController.totalscore()
-
 
 # Map static resources from the /public folder to the /assets URL path
 +anyhost
