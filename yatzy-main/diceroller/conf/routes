@@ -19,6 +19,12 @@ GET    /roll/:n                   controllers.HomeController.rollMany(n: Int)
 GET    /gotoyahtzee				controllers.HomeController.gotoyahtzee()
 
 +anyhost
+GET    /showrules                 controllers.HomeController.showrules()
+
++anyhost
+GET    /aboutgame                 controllers.HomeController.aboutgame()
+
++anyhost
 GET    /hold/:n				controllers.HomeController.hold(n: Int)
 
 +anyhost

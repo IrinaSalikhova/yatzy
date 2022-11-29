@@ -5,11 +5,12 @@ import play.libs.Json;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import java.util.concurrent.ThreadLocalRandom;
+
+import javax.naming.spi.DirStateFactory.Result;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-
 
 /**
  * This controller contains an action to handle HTTP requests
@@ -64,7 +65,12 @@ public class HomeController extends Controller {
  		game = new YatzeGame();
     	 return ok(views.html.version.render());
     }
- 
+	public Result showrules(){
+
+	}
+	public Result aboutgame(){
+		
+	}
     public Result roll() {
 
 		game.rollDice();
