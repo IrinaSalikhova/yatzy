@@ -278,5 +278,12 @@ function celebrateyahtzees() {
 } , 1200 );
 };
 
+//json
+localStorage.setItem(
+    "score",
+    JSON.stringify(totalscore)
+);
+document.getElementById
+
 
 

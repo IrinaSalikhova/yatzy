@@ -1,0 +1,56 @@
+.lwrapper{
+    background-color: #e391be;
+    text-align: center;
+    padding-left: 35%;
+    padding-top: 100;
+    padding-right: 10%;
+    height: 100%;
+    
+}
+
+.lboard_section{
+    padding: 50px;
+    background-color: rgb(109, 91, 210);
+    height: 80%;
+    overflow: hidden;
+    width: 45%;
+    vertical-align: auto;
+}
+
+.tableheading{
+    background-color: rgb(215, 171, 118);
+    color: #3d152b;
+    font-size: 30px;
+}
+
+.tableheading,th{
+    border: 3px solid rgb(118, 5, 120);
+    width: 2000px;
+    text-align: center;
+}
+
+.ranking{
+    border: 3px solid rgb(118, 5, 120);
+    width: 150px;
+}
+
+.scoring{
+    border: 3px solid rgb(118, 5, 120);
+    width: 200px;
+}
+
+.rank{
+    border: 3px solid rgb(118, 5, 120);
+    width: 200px;
+    font-size: 25px;
+}
+
+.name{
+    border: 3px solid rgb(118, 5, 120);
+    font-size: 25px;
+}
+
+.score{
+    border: 3px solid rgb(118, 5, 120);
+    font-size: 25px;
+}
