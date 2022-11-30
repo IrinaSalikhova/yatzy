@@ -387,3 +387,25 @@ margin-left: 75px;
 	font-size: 16px;
 	color: #f4f1bb;
 }
+
+.lwrapper{
+    border-color: #ED6A5A;
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    color: #1A090D;
+    text-align: center;
+    height: 100%;
+    position:relative;
+    display: inline;
+    float: right;
+    padding-right: 100px;
+}
+#leaderboard {
+    background-color: #F4F1BB;
+    }
+.name {
+width: 200px;}
+.score {
+width: 70px;}
+

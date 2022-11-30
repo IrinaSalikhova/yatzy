@@ -225,6 +225,7 @@ function finishgame() {
          }
     });
     var totalscore = 0;
+    let username = "";
     $.ajax({
         url: "http://localhost:9000/totalscore",
         type: 'GET',
@@ -237,8 +238,26 @@ function finishgame() {
 	    yahtzeetext.innerHTML = "Game over! \n Your score is " + totalscore + "!";
 	    yahtzeetext.style.top = 50 + 'px';
 	    yahtzeetext.style.left = 50 + 'px';
-	    document.getElementById("confetti-wrapper").appendChild(yahtzeetext);}
-    })
+	    document.getElementById("confetti-wrapper").appendChild(yahtzeetext);
+	    }
+    });
+    setTimeout(function() {
+    	 username = prompt('Please enter your name, sunny');
+    	 if (username == null || username == "") {
+    	     username = "Secret Agent"
+    	 };
+    	 let newleaderstring = '{"name": "' + username +'", "score": "' + totalscore + '"}';
+             let newleaderjson = JSON.parse(newleaderstring);
+             $.ajax({
+                 url: "http://localhost:9000/newleader",
+                 type: 'POST',
+                  headers: {
+                  'Content-Type': 'application/json'
+                  },
+                 data: newleaderstring,
+                 success: function(res) {}
+             });
+    },5000);
 }
 
 // animation for yahtzee

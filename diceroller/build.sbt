@@ -8,3 +8,6 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava)
 scalaVersion := "2.13.10"
 
 libraryDependencies += guice
+
+import NativePackagerHelper._
+mappings in Universal ++= directory("public")

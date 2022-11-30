@@ -25,6 +25,13 @@ GET    /countfor0				controllers.HomeController.countfor0()
 GET    /totalscore				controllers.HomeController.totalscore()
 +anyhost
 GET    /newGame				controllers.HomeController.newGame()
++anyhost
+GET    /leaderboard				controllers.HomeController.leaderboard()
++anyhost
+GET    /loadleaders				controllers.HomeController.loadleaders()
++anyhost
++ nocsrf
+POST    /newleader				controllers.HomeController.newleader(request: Request)
 
 
 # Map static resources from the /public folder to the /assets URL path
