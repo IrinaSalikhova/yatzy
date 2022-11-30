@@ -13,13 +13,33 @@
         <title>@title</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/dices.png")">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
     <body>
+    <div id="header">
+        <div id="headercontainer">
+            <h1 id="my.name">
+                <span id="y1">Y</span>
+                <span id="a2">a</span>
+                <span id="h3">h</span>
+                <span id="t4">t</span>
+                <span id="z5">z</span>
+                <span id="e6">e</span>
+                <span id="e7">e</span>
+                <span id="l8">!</span>
+            </h1>
+            <img src="@routes.Assets.versioned("images/dices.png")" class="imgheader" alt="dices icon">
+        </div>
+    </div>
+
         @* And here's where we render the `Html` object containing
          * the page content. *@
         @content
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="@routes.Assets.versioned("javascripts/main.js")" type="text/javascript"></script>
-    </body>
+    <div class="footer">
+        <p> Created by
+        </p>
+    </div>
+
+     </body>
 </html>

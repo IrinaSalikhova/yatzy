@@ -1,0 +1,67 @@
+@()
+
+@main("Yahtzee Leaderboard") {
+<div class="yahtzee-board">
+<div class="buttoncontainer">
+    <button id="gotoyahtzee" onclick="location.href='@routes.HomeController.gotoyahtzee';"> <span>New Game</span>  </button>
+    <button id="Rules"> <a href = "../Rules of Yahtzee.pdf"> <span>Rules</span>  </a> </button>
+    <!--Open the modal-->
+    <button id="About" > <span>About</span> </button>
+    <!--Main modal-->
+    <div id="aboutAssignment" class="assignment">
+        <!-- Close modal-->
+        <div class="about-content">
+            <span class="close">&times;</span>
+            <p> </p>
+        </div>
+
+    </div>
+</div>
+
+        <div class="lwrapper">
+                    <table id = "leaderboard">
+                        <thead class = "tableheading">
+                            <th class="rank">Rank</th>
+                            <th class="name">Name</th>
+                            <th class="score">Score</th>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+            </div>
+</div>
+  <script>
+  var leaderboard = document.getElementById('leaderboard').getElementsByTagName('tbody')[0];
+       $.ajax({
+                    url: "http://localhost:9000/loadleaders",
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function(res) {
+                        for (let i = 0; i<Object. keys(res). length; i++) {
+                            var newRow = leaderboard.insertRow();
+                            var rankC = newRow.insertCell();
+                            var nameC = newRow.insertCell();
+                            var scoreC = newRow.insertCell();
+                            var rankV = document.createTextNode(res[i].rank);
+                             var nameV = document.createTextNode(res[i].name);
+                            var scoreV = document.createTextNode(res[i].score);
+                            rankC.appendChild(rankV);
+                            nameC.appendChild(nameV);
+                            scoreC.appendChild(scoreV);
+                        }
+                    }
+        });
+
+
+
+  $(document).ready(function(){
+
+  });
+
+  </script>
+
+}
+
+
+  

@@ -1,21 +1,37 @@
 package controllers;
 
-import play.mvc.*;
-import play.libs.Json;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import java.util.concurrent.ThreadLocalRandom;
+import models.Leader;
+import models.YatzeEngine;
+import models.YatzeGame;
+import play.Environment;
+import play.libs.Json;
+import play.mvc.Controller;
+import play.mvc.Http;
+import play.mvc.Result;
+import javax.inject.Inject;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import models.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+
 /**
  * This controller contains an action to handle HTTP requests
  * to the application's home page.
  */
 public class HomeController extends Controller {
+	@Inject
+	private Environment environment;
 	ArrayList<Integer> 	dicelist = new ArrayList<>(); 
 	private YatzeGame game;
 	YatzeEngine tablescore;
 	int moveCount = 0;
-	
+
+
     /**
      * An action that renders an HTML page with a welcome message.
      * The configuration in the <code>routes</code> file means that
@@ -27,15 +43,6 @@ public class HomeController extends Controller {
     }
 
 	public Result rollMany(int n) {
-	/*	ObjectNode rollResult = Json.newObject();
-		ArrayNode rolling = Json.newArray();
-		for (int i = 0; i<n; i++) {
-			 int newdie = ThreadLocalRandom.current().nextInt(1,7);
-			 rolling.add(newdie);
-		}
-		rollResult.put("diceroller", rolling);
-        return ok(rollResult);
-        */
 		dicelist.clear();
 		for (int i = 0; i<n; i++) {
 			 int newdie = ThreadLocalRandom.current().nextInt(1,7);
@@ -111,6 +118,66 @@ public class HomeController extends Controller {
 		int totalscore = tablescore.get(17).boardElementValue();
 
 		return ok(Json.toJson(totalscore));
+	}
+
+	public Result leaderboard() {
+		return ok(views.html.leaderboard.render());
+	}
+
+	public Result loadleaders() {
+		ArrayList<Leader> existingLeaders = getResults();
+		return ok(Json.toJson(existingLeaders));
+	}
+	public Result newleader(Http.Request request) throws IOException {
+		JsonNode newleader = request.body().asJson();
+		String n = newleader.get("name").asText("");
+		int s = newleader.get("score").asInt(0);
+		Leader thisLeader = new Leader(n, s);
+		ArrayList<Leader> existingLeaders = getResults();
+		existingLeaders.add(thisLeader);
+		sortleaders(existingLeaders);
+
+		List<JsonNode> listOfLeaders = new ArrayList<>();
+		for (int i = 0; i<existingLeaders.size(); ++i) {
+			JsonNode result = Json.toJson(existingLeaders.get(i));
+			listOfLeaders.add(result);
+		}
+		ObjectNode finalresult = Json.newObject();
+		finalresult.set("leaders", Json.toJson(listOfLeaders));
+
+		FileWriter fileWriter = new FileWriter("public/json/leaders.json");
+		fileWriter.write(finalresult.toString());
+		fileWriter.flush();
+		fileWriter.close();
+		return ok(finalresult);
+	}
+
+		private ArrayList<Leader> getResults () {
+			InputStream is = environment.resourceAsStream("public/json/leaders.json");
+			JsonNode json = Json.parse(is);
+			JsonNode results = json.get("leaders");
+			ArrayList<Leader> existingLeaders = new ArrayList<>();
+			for (int i = 0; i< results.size(); i++ ) {
+				int r = results.get(i).get("rank").asInt(0);
+				String n = results.get(i).get("name").asText("");
+				int s = results.get(i).get("score").asInt(0);
+				Leader thisLeader = new Leader(r, n, s);
+				existingLeaders.add(thisLeader);
+			}
+			sortleaders(existingLeaders);
+
+		return existingLeaders;
+		}
+
+	private void sortleaders(ArrayList<Leader> existingLeaders) {
+		Collections.sort(existingLeaders);
+		for (int i = 0; i< existingLeaders.size(); i++ ) {
+			int r = i + 1;
+			existingLeaders.get(i).setRank(r);
+		};
+		if (existingLeaders.size() == 11) {
+			existingLeaders.remove(10);
+		}
 	}
 }
 
