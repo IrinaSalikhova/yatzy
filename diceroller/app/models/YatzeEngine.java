@@ -11,6 +11,7 @@ public class YatzeEngine {
     private int totalscore = 0;
     private int yahtzeechecker = 0;
     public YatzeEngine() {
+        //Initialize  the scoreboard array
         scoreboard = new BoardElement[18];
         for (int i = 0; i < scoreboard.length; i++) {
             scoreboard[i] = new BoardElement();
@@ -22,6 +23,7 @@ public class YatzeEngine {
     }
 
     public void countScore(YatzeGame gameDice) {
+        // set all score values to 0
         upperscore = 0;
         lowerscore = 0;
         totalscore = 0;
@@ -162,6 +164,7 @@ public class YatzeEngine {
     }
 
     public void renewBoard() {
+        // resets values of scoreboard
         for (int i = 0; i < scoreboard.length; i++) {
             scoreboard[i].setElement(0);
         }
@@ -184,6 +187,7 @@ public class YatzeEngine {
     }
 
     public ArrayList<Integer> scoreValues() {
+        // pulls up all score values form the arrayList
         ArrayList<Integer> 	scorelist = new ArrayList<>();
         for (int i = 0; i < scoreboard.length; i++) {
             scorelist.add(scoreboard[i].boardElementValue());

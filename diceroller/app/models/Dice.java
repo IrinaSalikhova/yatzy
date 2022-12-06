@@ -13,7 +13,7 @@ public class Dice {
     public int dieValue() {
         return die;
     }
-
+    // Have the die roll a random value form 1-6
     public void roll () {
         die = ThreadLocalRandom.current().nextInt(1, 7);
     }

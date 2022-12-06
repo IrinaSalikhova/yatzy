@@ -61,6 +61,7 @@ public class YatzeGame {
     }
 
     public ArrayList<Integer> diceValues() {
+        // update the arrayList on die values
         ArrayList<Integer> 	dicelist = new ArrayList<>();
         for (int i = 0; i < dice.length; i++) {
             dicelist.add(dieValue(i));
